@@ -10,11 +10,13 @@ namespace KomodoClaimRepository
 
     {
         //FakeDatabase
-        protected readonly Queue<Claim> _claims;
+        protected readonly Queue<Claim> _claims = new Queue<Claim>();
+
 
         public ClaimRepo()
         {
-            _claims = new Queue<Claim>();
+
+
         }
 
         //READ
@@ -35,7 +37,7 @@ namespace KomodoClaimRepository
 
             _claims.Enqueue(claim);
 
-            bool wasAdded = (_claims.Count > startingCount);
+            bool wasAdded = _claims.Count > startingCount;
 
             return wasAdded;
         }
@@ -63,36 +65,36 @@ namespace KomodoClaimRepository
             return count += 1;
         }
 
-        public void CreateTestClaims()
+        public void QueueSeed()
         {
-            _claims.Enqueue(new Claim 
+            _claims.Enqueue(new Claim
             {
                 ClaimId = 1,
                 ClaimAmount = 400.00m,
                 ClaimType = "Car",
                 DateOfIncident = new DateTime(2018, 04, 25),
                 ClaimDescription = "Accident",
-                DateOfClaim =new DateTime(2018, 01, 31)
+                DateOfClaim = new DateTime(2018, 04, 27)
             });
 
             _claims.Enqueue(new Claim
             {
                 ClaimId = 2,
-                ClaimAmount = 20,
-                ClaimType = "Claim2",
-                DateOfClaim = DateTime.Now.AddDays(-2),
-                ClaimDescription = "Claim2",
-                DateOfIncident = DateTime.Now.AddDays(-2)
+                ClaimAmount = 4000.00m,
+                ClaimType = "Home",
+                DateOfIncident = new DateTime(2018, 04, 11),
+                ClaimDescription = "Kitchen Fire",
+                DateOfClaim = new DateTime(2018, 04, 12),
             });
 
             _claims.Enqueue(new Claim
             {
                 ClaimId = 3,
-                ClaimAmount = 30,
-                ClaimType = "Claim3",
-                DateOfClaim = DateTime.Now.AddDays(-3),
-                ClaimDescription = "Claim3",
-                DateOfIncident = DateTime.Now.AddDays(-3)
+                ClaimAmount = 40.00m,
+                ClaimType = "Theft",
+                DateOfIncident = new DateTime(2018, 04, 27),
+                ClaimDescription = "Stolen Pancakes",
+                DateOfClaim = new DateTime(2018, 06, 01),
             });
         }
     }

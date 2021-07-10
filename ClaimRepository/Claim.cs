@@ -14,13 +14,13 @@ namespace KomodoClaimRepository
         public decimal ClaimAmount { get; set; }
         public DateTime DateOfIncident { get; set; }
         public DateTime DateOfClaim { get; set; }
-        
+
         //public bool IsValid => (DateOfIncident - DateOfClaim).TotalDays >= 30;
         public bool IsValid
         {
             get
             {
-                if ((DateOfIncident - DateOfClaim).TotalDays >= 30)
+                if ((DateOfClaim - DateOfIncident).TotalDays >= 30)
                 {
                     return false;
                 }
@@ -29,16 +29,16 @@ namespace KomodoClaimRepository
                     return true;
                 }
             }
-        }        
+        }
 
         public Claim() { }
 
         public Claim
-        (int claimId, 
-        string claimType, 
-        string claimDescription, 
-        decimal claimAmount, 
-        DateTime dateOfIncident, 
+        (int claimId,
+        string claimType,
+        string claimDescription,
+        decimal claimAmount,
+        DateTime dateOfIncident,
         DateTime dateOfClaim)
         {
             ClaimId = claimId;

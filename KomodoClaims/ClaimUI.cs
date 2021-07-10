@@ -40,17 +40,14 @@ namespace KomodoClaims
                 switch (userInput)
                 {
                     case "1":
-                        //Show all Items on Menu
                         ShowAllClaims();
                         break;
 
                     case "2":
-                        //Creating a Menu Item
-                        //HandleNextClaim();
+                        HandleNextClaim();
                         break;
 
                     case "3":
-                        //Removing a Menu Item
                         CreateNewClaim();
                         break;
 
@@ -69,7 +66,7 @@ namespace KomodoClaims
         {
             Console.Clear();
 
-            _claimRepo.CreateTestClaims();
+            _claimRepo.QueueSeed();
 
             var claims = _claimRepo.GetClaims();
 
@@ -97,57 +94,60 @@ namespace KomodoClaims
 
         private void CreateNewClaim()
         {
-            //Console.Clear();
+            Console.Clear();
 
-            //Console.WriteLine("Please enter the Claim ID: ");
-            //int claimId = Convert.ToInt32(Console.ReadLine());
-            //Console.WriteLine();
+            Console.WriteLine("Please enter the Claim ID: ");
+            int claimId = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();
 
-            //Console.WriteLine("Please enter the Claim Type: ");
-            //string claimType = Console.ReadLine();
-            //Console.WriteLine();
+            Console.WriteLine("Please enter the Claim Type: ");
+            string claimType = Console.ReadLine();
+            Console.WriteLine();
 
-            //Console.WriteLine("Please enter the Claim Description");
-            //string claimDescription = Console.ReadLine();
-            //Console.WriteLine();
+            Console.WriteLine("Please enter the Claim Description");
+            string claimDescription = Console.ReadLine();
+            Console.WriteLine();
 
-            //Console.WriteLine("Please enter the Claim Amount");
-            //decimal claimAmount = Convert.ToDecimal(Console.ReadLine());
-            //Console.WriteLine();
+            Console.WriteLine("Please enter the Claim Amount");
+            decimal claimAmount = Convert.ToDecimal(Console.ReadLine());
+            Console.WriteLine();
 
-            //Console.WriteLine("Please enter the Date of the Incident");
-            //DateTime dateOfIncident = Console.ReadLine(dateOfIncident);
-            //Console.WriteLine();
-            
-            //Console.WriteLine("Please enter the Date of the Claim");
-            //decimal mealPrice = Convert.ToDecimal(Console.ReadLine());
-            //Console.WriteLine();
-            
-            //Console.WriteLine("Please enter if the Claim is Valid");
-            //bool isValid  = Console.ReadLine(true);
-            //Console.WriteLine();
+            Console.WriteLine("Please enter the Date of the Incident");
+            DateTime dateOfIncident = Convert.ToDateTime(Console.ReadLine());
+            Console.WriteLine();
 
-            //var claim = new Claim(0, claimType, claimDescription, claimAmount, dateOfIncident, dateOfClaim, isValid);
+            Console.WriteLine("Please enter the Date of the Claim");
+            DateTime dateOfClaim = Convert.ToDateTime(Console.ReadLine());
+            Console.WriteLine();
 
-            //_claimRepo.CreateNewClaim(claim);
+            var claim = new Claim(0, claimType, claimDescription, claimAmount, dateOfIncident, dateOfClaim);
+
+            _claimRepo.CreateNewClaim(claim);
         }
 
-        private void RemoveMenuItem()
+        private void HandleNextClaim()
         {
-            //Console.Clear();
+            Console.Clear();
+            Console.WriteLine("Do you want to deal with this claim now (y/n)");
+            char y;
+            char n;
+            char.TryParse(Console.ReadLine(), out y);
+            char.TryParse(Console.ReadLine(), out n);
+            Console.WriteLine();
 
-            //Console.WriteLine("Enter the Meal Number you would like to remove from the Menu:");
 
-            //var mealNumber = Convert.ToInt32(Console.ReadLine());
+            var claims = _claimRepo.GetClaims();
 
-            //var isDeleted = _menuRepo.RemoveMenuItemByMealNumber(mealNumber);
 
-            //if (isDeleted)
-            //    Console.WriteLine("Removal successful");
-            //else
-            //    Console.WriteLine("Removal failed");
+            //    var isDeleted = _claimRepo.Dequeue();
 
-            //Console.ReadLine();
+            //    if (isDeleted)
+            //        Console.WriteLine("Removal successful");
+            //    else
+            //        Console.WriteLine("Removal failed");
+
+            //    Console.ReadLine();
+            //}
         }
     }
 }
